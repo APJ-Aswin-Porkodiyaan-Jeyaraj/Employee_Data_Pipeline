@@ -1,10 +1,10 @@
-from python:latest
+FROM python:latest
 
 WORKDIR /app
 
-copy requirements.txt
-run pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-copy . .
+COPY . .
 
-cmd["python", "main.py"]
+CMD ["python", "main.py"]
