@@ -1,4 +1,11 @@
+import os
+import sys
+
+os.environ["PYSPARK_PYTHON"] = sys.executable
+os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
+
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
 
 # Start Spark
 spark = (
@@ -24,6 +31,9 @@ columns = ["employee_id", "name", "department", "salary"]
 df = spark.createDataFrame(data, columns)
 
 # Display the data
+df.show()
+
+df = df.withColumn("Bonus", col("Salary") * 0.10)
 df.show()
 
 # Stop Spark
